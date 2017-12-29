@@ -5,8 +5,8 @@
 # catalog-license undef
 # catalog-version undef
 Name:		texlive-babel-kurmanji
-Version:	20131013
-Release:	9
+Version:	1.1
+Release:	1
 Summary:	TeXLive babel-kurmanji package
 Group:		Publishing
 URL:		http://tug.org/texlive
