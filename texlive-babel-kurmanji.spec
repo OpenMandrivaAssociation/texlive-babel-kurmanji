@@ -1,44 +1,28 @@
-Name:		texlive-babel-kurmanji
-Version:	30279
-Release:	2
-Summary:	TeXLive babel-kurmanji package
+%global tl_name babel-kurmanji
+%global tl_revision 30279
+
+Name:		texlive-%{tl_name}
+Epoch:		1
+Version:	1.1
+Release:	%{tl_revision}.1
+Summary:	Babel support for Kurmanji
 Group:		Publishing
-URL:		https://tug.org/texlive
-License:	http://www.tug.org/texlive/LICENSE.TL
-Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/babel-kurmanji.r%{version}.tar.xz
-Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/babel-kurmanji.doc.r%{version}.tar.xz
-Source2:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/babel-kurmanji.source.r%{version}.tar.xz
+URL:		https://www.ctan.org/tex-archive/macros/latex/contrib/babel-contrib/kurmanji
+License:	lppl1.3
+Source0:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/babel-kurmanji.r%{tl_revision}.tar.xz
+Source1:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/babel-kurmanji.doc.r%{tl_revision}.tar.xz
+Source2:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/babel-kurmanji.source.r%{tl_revision}.tar.xz
 BuildArch:	noarch
+BuildSystem:	texlive
 BuildRequires:	texlive-tlpkg
-Requires(pre):	texlive-tlpkg
-Requires(post):	texlive-kpathsea
+%texlive_base_requires
+Provides:	texlive(%{tl_name}) = %{tl_revision}
 
 %description
-TeXLive babel-kurmanji package.
+The package provides the language definition file for support of
+Kurmanji in babel. Kurmanji belongs to the family of Kurdish languages.
+Some shortcuts are defined, as well as translations to Kurmanji of
+standard "LaTeX names". Note that the package is dealing with 'Northern'
+Kurdish, written using a Latin-based alphabet. The arabxetex package
+offers support for Kurdish written in Arabic script.
 
-%post
-%{_sbindir}/texlive.post
-
-%postun
-if [ $1 -eq 0 ]; then
-	%{_sbindir}/texlive.post
-fi
-
-#-----------------------------------------------------------------------
-%files
-%{_texmfdistdir}/tex/generic/babel-kurmanji/kurmanji.ldf
-%doc %{_texmfdistdir}/doc/generic/babel-kurmanji/kurmanji.pdf
-#- source
-%doc %{_texmfdistdir}/source/generic/babel-kurmanji/kurmanji.dtx
-%doc %{_texmfdistdir}/source/generic/babel-kurmanji/kurmanji.ins
-
-#-----------------------------------------------------------------------
-%prep
-%setup -c -a1 -a2
-%autopatch -p1
-
-%build
-
-%install
-mkdir -p %{buildroot}%{_texmfdistdir}
-cp -fpar tex doc source %{buildroot}%{_texmfdistdir}
